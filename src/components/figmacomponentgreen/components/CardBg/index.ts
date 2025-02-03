@@ -1,0 +1,1 @@
+export { CardBg } from "./CardBg";

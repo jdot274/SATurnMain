@@ -1,0 +1,125 @@
+import { useEffect, useRef } from 'react';
+
+interface Particle {
+  x: number;
+  y: number;
+  size: number;
+  speedX: number;
+  speedY: number;
+  opacity: number;
+}
+
+export function AnimatedBackground() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const particles: Particle[] = [];
+    const numParticles = 150;
+
+    function createParticles() {
+      particles.length = 0;
+      for (let i = 0; i < numParticles; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          size: Math.random() * 2 + 1,
+          speedX: (Math.random() - 0.5) * 0.3,
+          speedY: (Math.random() - 0.5) * 0.3,
+          opacity: Math.random() * 0.5 + 0.2
+        });
+      }
+    }
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      createParticles();
+    }
+
+    function drawWave(offset: number, amplitude: number, frequency: number, opacity: number) {
+      const time = Date.now() * 0.001;
+      ctx.beginPath();
+      ctx.moveTo(0, canvas.height / 2);
+
+      for (let x = 0; x < canvas.width; x++) {
+        const y = Math.sin(x * frequency + time + offset) * amplitude + canvas.height / 2;
+        ctx.lineTo(x, y);
+      }
+
+      ctx.strokeStyle = `rgba(30, 64, 175, ${opacity})`;
+      ctx.stroke();
+    }
+
+    function animate() {
+      // Create gradient background
+      const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+      gradient.addColorStop(0, '#1e3a8a'); // Royal blue dark
+      gradient.addColorStop(0.5, '#1e40af'); // Royal blue medium
+      gradient.addColorStop(1, '#1e3a8a'); // Royal blue dark
+      
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Draw multiple waves with different parameters
+      ctx.lineWidth = 2;
+      for (let i = 0; i < 5; i++) {
+        drawWave(
+          i * 0.5,
+          30 + i * 15,
+          0.003 - i * 0.0002,
+          0.1 - i * 0.015
+        );
+      }
+
+      // Update and draw particles
+      particles.forEach((particle) => {
+        particle.x += particle.speedX;
+        particle.y += particle.speedY;
+
+        // Wrap around screen edges
+        if (particle.x < 0) particle.x = canvas.width;
+        if (particle.x > canvas.width) particle.x = 0;
+        if (particle.y < 0) particle.y = canvas.height;
+        if (particle.y > canvas.height) particle.y = 0;
+
+        // Draw particle with gradient
+        const particleGradient = ctx.createRadialGradient(
+          particle.x, particle.y, 0,
+          particle.x, particle.y, particle.size
+        );
+        particleGradient.addColorStop(0, `rgba(219, 234, 254, ${particle.opacity})`);
+        particleGradient.addColorStop(1, 'rgba(219, 234, 254, 0)');
+
+        ctx.beginPath();
+        ctx.fillStyle = particleGradient;
+        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      requestAnimationFrame(animate);
+    }
+
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+    const animationFrame = requestAnimationFrame(animate);
+
+    return () => {
+      window.removeEventListener('resize', resizeCanvas);
+      cancelAnimationFrame(animationFrame);
+    };
+  }, []);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      className="fixed top-0 left-0 right-0 bottom-0 -z-10 min-w-[100vw] min-h-[100vh] w-full h-full"
+      style={{ WebkitBackdropFilter: 'blur(100px)' }}
+    />
+  );
+}

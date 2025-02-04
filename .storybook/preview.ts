@@ -1,13 +1,11 @@
-import '../src/app/globals.css';
+import '../src/index.css';
 import type { Preview } from "@storybook/react";
 import { fn } from "@storybook/test";
 
 const preview: Preview = {
   parameters: {
     layout: 'centered',
-    actions: {
-      handles: ['onClick', 'onSubmit', 'onChange'], // Explicitly define event handlers
-    },
+    actions: { argTypesRegex: "^on[A-Z].*" },
     controls: {
       matchers: {
         color: /(background|color)$/i,

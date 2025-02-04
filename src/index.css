@@ -123,16 +123,16 @@ html, body {
 
 /* Utilities */
 @layer utilities {
-  .transform-style-preserve-3d {
-    transform-style: preserve-3d;
-  }
-
-  .backface-hidden {
-    backface-visibility: hidden;
-  }
-
   .perspective-1000 {
     perspective: 1000px;
+  }
+  
+  .transform-style-3d {
+    transform-style: preserve-3d;
+  }
+  
+  .backface-hidden {
+    backface-visibility: hidden;
   }
 
   .rotate-y-180 {
@@ -199,6 +199,7 @@ html, body {
 .stars-container:hover .ellipse {
   animation-duration: 1.5s;
 }
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -254,11 +255,20 @@ html, body {
     --chart-5: 340 75% 55%;
   }
 }
+
 @layer base {
   * {
     @apply border-border;
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .card {
+    @apply w-24 h-24 bg-primary flex items-center justify-center text-2xl font-bold 
+           cursor-pointer transform transition-transform duration-500 rounded-lg;
+    perspective: 1000px;
   }
 }

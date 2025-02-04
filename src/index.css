@@ -10,9 +10,9 @@ html, body {
   padding: 0;
   -webkit-tap-highlight-color: transparent;
   background: #000000;
-  text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -67,7 +67,6 @@ html, body {
 
 /* App Container */
 #root {
-  display: flex;
   min-height: 100vh;
   width: 100vw;
   background: #000000;

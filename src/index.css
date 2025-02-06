@@ -2,15 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Reset and base styles */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
+/* Root variables and base styles */
 :root {
   --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
@@ -29,8 +21,18 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Base element styles */
+html, body {
+  @apply h-full w-full m-0 p-0 bg-black antialiased;
   -webkit-text-size-adjust: 100%;
-  text-size-adjust: 100%;
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* Typography */
@@ -88,31 +90,7 @@ a:hover {
   }
 }
 
-/* Base Styles */
-html, body {
-  @apply h-full w-full m-0 p-0 bg-black antialiased;
-  -webkit-tap-highlight-color: transparent;
-  -moz-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%; /* Chrome, Safari, newer versions of Opera */
-  -ms-text-size-adjust: 100%;     /* IE */
-  text-size-adjust: 100%;         /* Standard: Firefox 61+, Safari 9+ */
-}
-
-@supports (text-size-adjust: 100%) {
-    html, body {
-        text-size-adjust: 100%;
-    }
-}
-
-* {
-  box-sizing: border-box;
-  -webkit-touch-callout: none;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-text-size-adjust: 100%;
-  -moz-text-size-adjust: 100%;
-  text-size-adjust: 100%;
-}
-
+/* Animations */
 @keyframes modal-pop {
   0% {
     opacity: 0;
@@ -311,6 +289,7 @@ html, body {
   }
 }
 
+/* Components */
 @layer components {
   .card {
     @apply w-24 h-24 bg-primary flex items-center justify-center text-2xl font-bold 

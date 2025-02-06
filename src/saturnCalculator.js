@@ -11,13 +11,5 @@ function calculateSaturnScore(value) {
   const SATURN_FACTOR = 42
   return value * SATURN_FACTOR
 }
-}
-
-module.exports = { calculateSaturnScore };
-function calculateSaturnScore(value) {
-	// Simple example calculation: multiply by a Saturn constant factor
-	const SATURN_FACTOR = 42;
-	return value * SATURN_FACTOR;
-}
 
 module.exports = { calculateSaturnScore };

@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .card {
+    @apply w-24 h-24 bg-primary flex items-center justify-center text-2xl font-bold 
+           cursor-pointer transform transition-transform duration-500 rounded-lg 
+           perspective-1000;
+  }
+
+  .card.flipped {
+    @apply bg-accent text-white transform rotate-y-180;
+  }
+
+  .card.matched {
+    @apply bg-success text-white cursor-not-allowed;
+  }
+}

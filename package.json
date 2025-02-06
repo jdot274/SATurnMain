@@ -81,6 +81,7 @@
     "@storybook/react": "^8.5.3",
     "@storybook/react-vite": "^8.5.3",
     "@storybook/test": "^8.5.3",
+    "@tailwindcss/postcss": "^4.0.4",
     "@testing-library/react": "^14.2.1",
     "@types/canvas-confetti": "^1.6.4",
     "@types/three": "^0.172.0",

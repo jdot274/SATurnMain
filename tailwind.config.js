@@ -1,10 +1,10 @@
 /** @type {import('tailwindcss').Config} */
-export default {
+module.exports = {
 	darkMode: ['class'],
 	content: [
 	  './index.html',
-	  './src/**/*.{js,jsx,ts,tsx,mdx}',  // Added .mdx for Storybook compatibility
-	  './.storybook/**/*.{js,jsx,ts,tsx,mdx}' // Added Storybook directory
+	  './src/**/*.{js,jsx,ts,tsx,mdx}',
+	  './.storybook/**/*.{js,jsx,ts,tsx,mdx}',
 	],
 	theme: {
 	  extend: {

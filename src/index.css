@@ -4,24 +4,18 @@
 
 /* Base Styles */
 html, body {
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  padding: 0;
+  @apply h-full w-full m-0 p-0 bg-black antialiased;
   -webkit-tap-highlight-color: transparent;
-  background: #000000;
   -moz-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
   text-size-adjust: 100%;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 * {
   box-sizing: border-box;
   -webkit-touch-callout: none;
   -webkit-tap-highlight-color: transparent;
-  -webkit-text-size-adjust: none;
 }
 
 @keyframes modal-pop {
@@ -50,7 +44,7 @@ html, body {
   animation: twinkle 3s ease-in-out infinite;
 }
 
-/* Better touch handling */
+/* Touch handling */
 @supports (-webkit-touch-callout: none) {
   .touch-scroll {
     touch-action: none;
@@ -65,43 +59,29 @@ html, body {
   }
 }
 
-/* App Container */
+/* App container */
 #root {
-  min-height: 100vh;
-  width: 100vw;
-  background: #000000;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 0;
+  @apply min-h-screen w-screen bg-black p-0 flex items-center justify-center z-0;
 }
 
 #root > div {
-  width: 100vw;
-  height: 100vh;
+  @apply w-screen h-screen relative flex flex-col touch-none select-none;
   background: linear-gradient(to bottom right, #020617, #1e3a8a, #020617);
-  position: relative;
   padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
-  display: flex;
-  flex-direction: column;
-  touch-action: none;
-  user-select: none;
 }
 
-/* Main scrollable content area */
+/* Scrollable content */
 #root > div > div {
   flex: 1;
   touch-action: none;
   cursor: default;
 }
 
-/* Add drag cursor when holding mouse button */
 #root > div > div:active {
   cursor: grabbing !important;
 }
 
-/* Custom Scrollbar */
+/* Custom scrollbar */
 .custom-scrollbar::-webkit-scrollbar {
   width: 4px;
 }
@@ -122,52 +102,23 @@ html, body {
 
 /* Utilities */
 @layer utilities {
-  .perspective-1000 {
-    perspective: 1000px;
-  }
-  
-  .transform-style-3d {
-    transform-style: preserve-3d;
-  }
-  
-  .backface-hidden {
-    backface-visibility: hidden;
-  }
-
-  .rotate-y-180 {
-    transform: rotateY(180deg);
-  }
-
-  .rotate-y-0 {
-    transform: rotateY(0deg);
-  }
-
-  .rotate-x-12 {
-    transform: rotateX(12deg);
-  }
+  .perspective-1000 { perspective: 1000px }
+  .transform-style-3d { transform-style: preserve-3d }
+  .backface-hidden { backface-visibility: hidden }
+  .rotate-y-180 { transform: rotateY(180deg) }
+  .rotate-y-0 { transform: rotateY(0deg) }
+  .rotate-x-12 { transform: rotateX(12deg) }
 }
 
 /* Animations */
 @keyframes fade-in {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(10px) }
+  to { opacity: 1; transform: translateY(0) }
 }
 
 @keyframes gradient-x {
-  0%, 100% {
-    background-position: 0% 50%;
-    opacity: 0.8;
-  }
-  50% {
-    background-position: 100% 50%;
-    opacity: 1;
-  }
+  0%, 100% { background-position: 0% 50%; opacity: 0.8 }
+  50% { background-position: 100% 50%; opacity: 1 }
 }
 
 .animate-fade-in {
@@ -180,25 +131,20 @@ html, body {
 }
 
 @keyframes float {
-  0%, 100% {
-    transform: translateY(0) scale(1);
-    opacity: 0.4;
-  }
-  50% {
-    transform: translateY(-10px) scale(1.2);
-    opacity: 0.8;
-  }
+  0%, 100% { transform: translateY(0) scale(1); opacity: 0.4 }
+  50% { transform: translateY(-10px) scale(1.2); opacity: 0.8 }
 }
 
 .animate-float {
   animation: float 3s ease-in-out infinite;
 }
 
-/* Add hover effect to container */
+/* Hover effects */
 .stars-container:hover .ellipse {
   animation-duration: 1.5s;
 }
 
+/* Theme */
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -227,6 +173,7 @@ html, body {
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
   }
+
   .dark {
     --background: 20 14.3% 4.1%;
     --foreground: 60 9.1% 97.8%;
@@ -253,14 +200,17 @@ html, body {
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
   }
-}
-
-@layer base {
   * {
-    @apply border-border;
+    @apply border-border box-border;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    text-size-adjust: 100%;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground min-h-screen;
   }
 }
 

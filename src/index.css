@@ -200,6 +200,7 @@ html, body {
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
   }
+
   * {
     @apply border-border box-border;
     -webkit-touch-callout: none;
@@ -209,6 +210,7 @@ html, body {
     -ms-text-size-adjust: 100%;
     text-size-adjust: 100%;
   }
+
   body {
     @apply bg-background text-foreground min-h-screen;
   }
